@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECAP 152 JS-DOM</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="text-center mb-3">ToBoolist</h1>
+
+
+        <div class="bg-gradient col-md-10 m-auto">
+
+            <form class="toboolistForm">
+                <div class="input-group mb-3">
+                    <input name="taskText" type="text" class="toboolistTask form-control"
+                        placeholder="Inserisci task ...." required min="5" max="255">
+                    <button class="toboolistBtn btn btn-success" type="submit">Aggiungi task</button>
+                </div>
+            </form>
+
+
+            <ul class="tobooItems list-group">
+                <!-- <li class="list-group-item list-group-item-action">An item</li> -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

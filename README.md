@@ -1,1 +1,5 @@
-# tutoring-152
+# Welcome 152!
+Rules:
+- 🚫 Sirio
+
+- 🚫 Python

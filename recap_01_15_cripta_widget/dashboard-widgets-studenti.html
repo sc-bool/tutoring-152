@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Widget</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .widget {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      height: 100%;
+    }
+
+    .widget h2 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 8px;
+    }
+
+    .timer-display {
+      font-size: 3em;
+      text-align: center;
+      color: #667eea;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .calc-result {
+      text-align: center;
+      font-size: 2em;
+      color: #667eea;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .text-area.yellow {
+      background-color: #fef08a !important;
+    }
+
+    .text-area.red {
+      background-color: #fca5a5 !important;
+    }
+
+    .pass-result {
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      text-align: center;
+      font-family: monospace;
+      font-size: 16px;
+      word-break: break-all;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .todo-item {
+      background: #f8f9fa;
+      margin-bottom: 8px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row g-3">
+      <!-- Todo List Widget -->
+      <div class="col-lg-4 col-md-6">
+        <div class="widget">
+          <h2>📝 Todo List</h2>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="todoInput" placeholder="Aggiungi una task..." />
+            <button class="btn btn-primary">Aggiungi</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timer Widget -->
+      <div class="col-lg-4 col-md-6">
+        <div class="widget">
+          <h2>⏱️ Timer</h2>
+          <div class="timer-display" id="timerDisplay">0</div>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn btn-success">Start</button>
+            <button class="btn btn-warning">Pausa</button>
+            <button class="btn btn-danger">Stop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculator Widget -->
+      <div class="col-lg-4 col-md-6">
+        <div class="widget">
+          <h2>🧮 Calcolatrice</h2>
+          <div class="mb-3">
+            <input type="number" class="form-control mb-2" id="num1" placeholder="Primo numero" />
+            <select class="form-select mb-2" id="operation">
+              <option value="+">Addizione (+)</option>
+              <option value="-">Sottrazione (-)</option>
+              <option value="*">Moltiplicazione (*)</option>
+              <option value="/">Divisione (/)</option>
+            </select>
+            <input type="number" class="form-control mb-2" id="num2" placeholder="Secondo numero" />
+            <button class="btn btn-primary w-100">Calcola</button>
+          </div>
+          <div class="calc-result" id="calcResult">-</div>
+        </div>
+      </div>
+
+      <!-- Textarea Widget -->
+      <div class="col-lg-6 col-md-6">
+        <div class="widget">
+          <h2>📄 Textarea</h2>
+          <textarea class="form-control text-area mb-2" id="textArea" rows="5"
+            placeholder="Scrivi qualcosa..."></textarea>
+          <div class="d-flex justify-content-between text-muted small">
+            <span>Caratteri: <strong id="charCount">0</strong></span>
+            <span>Parole: <strong id="wordCount">0</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Generator Widget -->
+      <div class="col-lg-6 col-md-6">
+        <div class="widget">
+          <h2>🔐 Password Generator</h2>
+          <div class="mb-3">
+            <label class="form-label">Lunghezza:</label>
+            <input type="number" class="form-control mb-2" id="passLength" value="12" min="4" max="50" />
+            <button class="btn btn-primary w-100 mb-3">
+              Genera Password
+            </button>
+            <div class="pass-result" id="passResult">
+              La password apparirà qui
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
