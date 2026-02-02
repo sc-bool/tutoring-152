@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prato Fiorito — Template Grafico</title>
+    <style>
+      :root {
+        --bg: #0f1220;
+        --panel: #151a2e;
+        --panel-2: #0b0e1a;
+        --border: #2a335a;
+        --shadow: rgba(0, 0, 0, 0.35);
+
+        --cell: #2a335a;
+        --cell-hi: #3a4680;
+        --cell-lo: #1a2140;
+        --cell-open: #11162c;
+
+        --gap: 6px;
+        --radius: 14px;
+
+        --font:
+          ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial;
+        --mono:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: radial-gradient(
+          1200px 800px at 30% 20%,
+          #1d2450 0%,
+          var(--bg) 55%,
+          #070915 100%
+        );
+        color: #e9ecff;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .game {
+        width: min(560px, 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) + 6px);
+        box-shadow: 0 18px 40px var(--shadow);
+        padding: 16px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.25),
+          rgba(0, 0, 0, 0.1)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 12px 12px;
+        margin-bottom: 12px;
+      }
+
+      .counter {
+        width: 100px;
+        background: linear-gradient(180deg, #0a0d18, #070a12);
+        border: 1px solid #2c3562;
+        border-radius: 10px;
+        padding: 10px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #ff4d4d;
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.03);
+      }
+
+      .board-wrap {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.22),
+          rgba(0, 0, 0, 0.1)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px;
+      }
+
+      .board {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr); /* 10 colonne demo */
+        gap: var(--gap);
+      }
+
+      /* Cella base (chiusa) */
+      .cell {
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+        border: 1px solid #334079;
+        background: linear-gradient(180deg, var(--cell-hi), var(--cell));
+        box-shadow:
+          0 8px 14px rgba(0, 0, 0, 0.22),
+          inset 0 2px 0 rgba(255, 255, 255, 0.08),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        user-select: none;
+      }
+
+      /* effetto "rilievo" stile classico */
+      .cell.closed {
+        outline: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      /* Cella premuta / hover (solo effetto) */
+      .cell.closed:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+      }
+
+      /* Cella aperta */
+      .cell.open {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0)
+        );
+        border: 1px solid #2a335a;
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+        color: #dfe6ff;
+      }
+
+      /* Cella mina */
+      .cell.mine {
+        background:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0) 60%
+          ),
+          linear-gradient(180deg, #3a1d2a, #1b0f19);
+        border: 1px solid #5a2b3f;
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+      }
+      .cell.mine::before {
+        content: "💣";
+        font-size: 18px;
+        filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.45));
+      }
+
+      /* Footer / legenda */
+      .legend {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        opacity: 0.85;
+        font-size: 13px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .swatch {
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .swatch.closed {
+        background: linear-gradient(180deg, var(--cell-hi), var(--cell));
+      }
+      .swatch.open {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0)
+        );
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+      }
+      .swatch.flag {
+        background: linear-gradient(180deg, #2f3a7a, #20285a);
+      }
+      .swatch.mine {
+        background: linear-gradient(180deg, #3a1d2a, #1b0f19);
+      }
+
+      @media (min-width: 720px) {
+        .game {
+          width: 620px;
+        }
+        .board {
+          gap: 7px;
+        }
+        .cell {
+          border-radius: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="game" aria-label="Prato Fiorito (solo grafica)">
+      <header class="topbar" aria-label="Pannello di controllo">
+        <button id="new-game">New game</button>
+        <div class="counter">0</div>
+      </header>
+
+      <section class="board-wrap" aria-label="Campo di gioco">
+        <div class="board"></div>
+
+        <div class="legend" aria-label="Legenda stati">
+          <div class="chip">
+            <span class="swatch closed"></span>Chiusa (closed)
+          </div>
+          <div class="chip"><span class="swatch open"></span>Aperta (open)</div>
+          <div class="chip"><span class="swatch mine"></span>Mina (mine)</div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
