@@ -41,11 +41,9 @@ newGameButton.addEventListener("click", () => {
           // else if (!cell.classList.contains("open")) {
           cell.classList.add("open");
           openedCells.push(cellNumber);
+          // let nOpened = board.querySelectorAll('.open').length
           let nOpened = openedCells.length;
           counter.innerHTML = nOpened;
-          // let openedCells = board.querySelectorAll('.open').length
-          // counter.innerHTML = openedCells
-          // if (openedCells === 100 - numberOfBombs)
           if (nOpened === 100 - numberOfBombs) {
             gameEnded(["IMPOSSIBILE, ABBIAMO VINTO!"]);
           }
